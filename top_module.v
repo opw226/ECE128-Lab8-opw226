@@ -23,20 +23,27 @@
 module top_module(
 input clk,
 output [3:0] sseg_a_o,
- output [6:0] sseg_c_o);
+output [6:0] sseg_c_o);
  
  wire clock_out;
  wire [11:0] count;
  wire en;
  wire [15:0] bcd_out;
  wire rdy;
+ reg [15:0] bcd_i;
  
  
- clock_divider uut(clk, clock_out);
+ clk_divider uut(clk, clock_out);
  Counter uut1(clock_out, count, en);
  Bin2BCD uut2(clock_out, en, count, bcd_out, rdy);
  multi_seg_drive uut3(clock_out, bcd_out, sseg_a_o, sseg_c_o);
  
+/* always @(posedge clk)
+    begin
+        if (rdy)
+        bcd_i<= bcd_out;
+        
+    end*/
  
 endmodule
 
