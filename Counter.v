@@ -20,23 +20,37 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module Counter(clk_in,count, en);
-input wire clk_in;
-output reg [11:0] count = 12'b000000000000;
-output reg en;
+module Counter(clk, bin_cnt, done);
+input clk;
+output done;
+output [11:0] bin_cnt;
 
-    always @(posedge clk_in) begin
+parameter c_reg_size = 34;
+
+reg [c_reg_size -1:0] count = 0;
+reg fin = 0;
+reg old_b = 0;
+
+
+ always @(posedge clk)
+    begin
+    count <= count+1;
+        if((old_b && !count[c_reg_size-12]) || (!old_b && count[c_reg_size-12]))
+            begin
+            fin <=1;
+            end
+        else
+            begin
+            fin <=0;
+            end
+         old_b <=count[c_reg_size-12];
+         end
+     
+assign bin_cnt =  count[c_reg_size-1: c_reg_size-12];
+assign done = fin;   
     
-    if (count == 12'b111111111111) begin
-            count <= 12'b000000000000;  // Wrap back to zero when max value is reached
-            en <= 1'b0;
-        end else begin
-          //  count <= count + 1;
-        count <= count + 1;  // Increment the counter on each clock edge
-        en <= 1'b1;
-        
-    end
-    end
-
+    
+    
 endmodule
+
 

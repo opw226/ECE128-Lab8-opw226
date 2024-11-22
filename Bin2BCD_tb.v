@@ -33,6 +33,9 @@ module Bin2BCD_tb();
         bin_d_in = 12'b010111100111;
         en = 1'b1;
         clk = 0;
+        #50;
+        bin_d_in = 12'b100101010101;
+        en = 1'b1;
         forever #10 clk = ~clk;
     end
     

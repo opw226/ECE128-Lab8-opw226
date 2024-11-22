@@ -45,7 +45,7 @@ module clk_divider(clock_in,clock_out
     );
 input clock_in; // input clock on FPGA
 output reg clock_out; // output clock after dividing the input clock by divisor
-reg[27:0] counter=28'd256;
+reg[27:0] counter=28'd4;
 parameter DIVISOR = 28'd2;
 // The frequency of the output clk_out
 //  = The frequency of the input clk_in divided by DIVISOR
