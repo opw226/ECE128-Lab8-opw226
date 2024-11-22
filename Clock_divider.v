@@ -19,28 +19,7 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-/*module clk_divider(clk_in,clock_out);
 
-
-input clk_in;
-output reg clock_out = 1'b0;
-reg [7:0] count = 8'b000000000000;
-
-
-    always @(posedge clk_in) begin
-    
-    if (count == 8'b1111111) begin
-            count <= 8'b000000000000;  // Wrap back to zero when max value is reached
-            clock_out <= ~clock_out;
-        end else begin
-          //  count <= count + 1;
-        count <= count + 1;  // Increment the counter on each clock edge
-      
-        
-    end
-    end
-
-endmodule*/
 module clk_divider(clock_in,clock_out
     );
 input clock_in; // input clock on FPGA
